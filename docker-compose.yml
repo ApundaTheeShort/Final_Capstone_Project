@@ -21,7 +21,7 @@ services:
     build: .
     container_name: django_backend
     ports:
-      - "8000:8000"
+      - "8062:8000"
     volumes:
       - .:/app
     depends_on:
@@ -37,7 +37,7 @@ services:
     image: adminer
     container_name: adminer_ui
     ports:
-      - "8080:8080"
+      - "8061:8080"
     depends_on:
       - db
 
