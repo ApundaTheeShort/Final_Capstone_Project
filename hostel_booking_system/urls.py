@@ -30,5 +30,6 @@ urlpatterns = [
     path('api/api-token-auth/', drf_auth_views.obtain_auth_token),
     # path('accounts/', include('accounts.urls')),
     path('api/', include('accounts.urls')),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('api/', include('hostels.urls')),
 ]

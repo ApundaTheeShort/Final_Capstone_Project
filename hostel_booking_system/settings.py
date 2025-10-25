@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'accounts',
+    'hostels',
 ]
 
 MIDDLEWARE = [
@@ -146,4 +147,5 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
 }
 
-LOGOUT_REDIRECT_URL = '/accounts/login/'
+LOGOUT_REDIRECT_URL = '/api/login/'
+LOGIN_REDIRECT_URL = '/api/profile/'

@@ -6,6 +6,7 @@ from rest_framework import viewsets, permissions
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
 from .serializers import CustomUserSerializers
+from .permissions import IsStudent, IsCustodian, IsAdmin, IsCustodianOrAdmin
 
 # Create your views here.
 
@@ -35,8 +36,7 @@ def profile(request):
     return render(request, 'accounts/profile.html', {'user': request.user})
 
 
-# @is_admin
 class UserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all().order_by("-date_joined")
     serializer_class = CustomUserSerializers
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated & IsCustodianOrAdmin]
