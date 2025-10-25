@@ -1,0 +1,36 @@
+Code-wise Accomplishments:
+
+1.  **Bug Fix in `accounts/views.py`**:
+    *   Corrected the import for `messages` from `django.contrib` and its usage in the `register` view to properly display success messages.
+
+2.  **Created Templates**:
+    *   `accounts/templates/accounts/register.html`: Template for user registration.
+    *   `accounts/templates/accounts/login.html`: Template for user login.
+    *   `accounts/templates/accounts/logged_out.html`: Template displayed after successful logout.
+    *   `accounts/templates/base.html`: Base template for consistent page structure, including navigation links for authentication and profile.
+
+3.  **Updated `hostel_booking_system/settings.py`**:
+    *   Configured `TEMPLATES` setting to include the `accounts/templates` directory, allowing Django to locate the new templates.
+    *   Added `django.template.context_processors.debug` to `context_processors` for debugging purposes.
+    *   Added `LOGOUT_REDIRECT_URL = '/accounts/login/'` to redirect users to the login page after logging out.
+
+4.  **Added Profile View and Template**:
+    *   Created a `profile` view in `accounts/views.py` (decorated with `@login_required`) to display authenticated user information.
+    *   Created `accounts/templates/accounts/profile.html` to render the user's profile details.
+
+5.  **Updated `accounts/urls.py`**:
+    *   Added a URL pattern for the `profile` view (`path('profile/', profile, name='profile')`).
+
+6.  **Updated `base.html` for Logout Functionality**:
+    *   Modified the logout link in `base.html` to use a POST form with `{% csrf_token %}`. This resolves the `Method Not Allowed (GET)` error by ensuring logout requests are sent as POST, as expected by Django's `LogoutView`.
+
+7.  **Fixed `hostel_booking_system/urls.py`**:
+    *   Corrected an `AssertionError` by removing the incorrect `router.register` call for `accounts.urls`.
+    *   Added `path('accounts/', include('accounts.urls'))` to correctly include the `accounts` app's URL patterns.
+    *   Added `path('', include('accounts.urls'))` to redirect the root URL to the accounts app.
+
+8.  **Fixed `accounts/models.py` - CustomUserManager**:
+    *   Corrected the `create_user` method in `CustomUserManager` by changing `user.save(using=self)` to `user.save(using=self._db)`. This resolved a `TypeError` during superuser creation by ensuring the correct database alias is passed to the `save` method.
+
+9.  **Modified `accounts/models.py` - CustomUser Model**:
+    *   Explicitly defined the `username` field in `CustomUser` with `blank=True, null=True`. This resolved an `IntegrityError` during user registration by allowing the `username` field to be optional and store `NULL` values, preventing duplicate empty string entries.
