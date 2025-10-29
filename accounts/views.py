@@ -40,3 +40,6 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all().order_by("-date_joined")
     serializer_class = CustomUserSerializers
     permission_classes = [permissions.IsAuthenticated & IsCustodianOrAdmin]
+    filterset_fields = ['role', 'username']
+    search_fields = ['username', 'first_name', 'last_name', 'email']
+    ordering_fields = ['date_joined', 'username']

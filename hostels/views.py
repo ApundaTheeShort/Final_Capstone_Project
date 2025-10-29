@@ -20,6 +20,9 @@ class HostelListCreateAPIView(generics.ListCreateAPIView):
     queryset = Hostel.objects.all().order_by('-created_at')
     serializer_class = HostelSerializer
     # permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['name', 'location', 'custodian_id']
+    search_fields = ['name', 'location']
+    ordering_fields = ['created_at', 'name', 'capacity']
 
     def get_serializer_class(self):
         user = self.request.user
@@ -44,6 +47,9 @@ class HostelRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
 class RoomListCreateAPIView(generics.ListCreateAPIView):
     queryset = Rooms.objects.all().order_by('-created_at')
     serializer_class = RoomSerializer
+    filterset_fields = ['room_type', 'price_per_semester', 'hostel', 'is_available']
+    search_fields = ['room_number', 'hostel__name']
+    ordering_fields = ['created_at', 'price_per_semester', 'room_number']
 
     def get_serializer_class(self):
         user = self.request.user

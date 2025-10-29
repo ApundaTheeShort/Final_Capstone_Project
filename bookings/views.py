@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions
-from rest_framework.response import Response
+# from rest_framework.response import Response
 from .serializers import BookingSerializer, StudentBookingSerializer
 from .models import Booking
 from accounts.permissions import IsStudent, IsCustodianOrAdmin
@@ -11,6 +11,9 @@ from accounts.permissions import IsStudent, IsCustodianOrAdmin
 class BookingListCreateView(generics.ListCreateAPIView):
     # serializer_class = BookingSerializer
     # permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['status', 'room_id', 'student_id']
+    search_fields = ['student_id__username', 'room_id__room_number']
+    ordering_fields = ['created_at', 'check_in_date', 'check_out_date', 'status']
 
     def get_queryset(self):
         user = self.request.user

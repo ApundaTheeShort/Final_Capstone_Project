@@ -6,4 +6,24 @@
   <p><strong>First Name:</strong> {{ user.first_name }}</p>
   <p><strong>Last Name:</strong> {{ user.last_name }}</p>
   <p><strong>Role:</strong> {{ user.role }}</p>
+
+  <h3>Allowed Actions</h3>
+  <ul>
+    <li><a href="{% url 'hostel-list-create' %}">View Hostels</a></li>
+    <li><a href="{% url 'room-list-create' %}">View Rooms</a></li>
+    <li><a href="{% url 'bookings-list-create' %}">View Bookings</a></li>
+
+    {% if user.role == 'student' %}
+      <li><a href="{% url 'bookings-list-create' %}">Create Booking</a></li>
+    {% endif %}
+
+    {% if user.role == 'custodian' or user.role == 'admin' %}
+      <li><a href="{% url 'room-list-create' %}">Create Room</a></li>
+      <li><a href="{% url 'users-list' %}">View Users</a></li>
+    {% endif %}
+
+    {% if user.role == 'admin' %}
+      <li><a href="{% url 'hostel-list-create' %}">Create Hostel</a></li>
+    {% endif %}
+  </ul>
 {% endblock %}
