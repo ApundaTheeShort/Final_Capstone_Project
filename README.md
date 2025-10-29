@@ -1,6 +1,7 @@
 # Hostel Booking System
 
 A comprehensive web application for managing hostel bookings, room inventory, user authentication, and role-based access control. This project is built using Django REST Framework and MySQL, fully containerized with Docker for easy deployment.
+A comprehensive web application for managing hostel bookings, room inventory, user authentication, and role-based access control. This project is built using Django REST Framework and MySQL, fully containerized with Docker for easy deployment.
 
 ## Overview
 
